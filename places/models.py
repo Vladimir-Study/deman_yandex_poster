@@ -13,7 +13,10 @@ class Place(models.Model):
 
 class PlaceImage(models.Model):
     place = models.ForeignKey('Place', on_delete=models.CASCADE, null=True)
-    url_img = models.URLField()
+    url_img = models.ImageField(upload_to="static/img/")
 
     def __str__(self):
-        return self.place
+        return f"{self.id} {self.place}"
+
+    class Meta:
+        ordering = ['-id']
