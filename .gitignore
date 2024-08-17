@@ -7,5 +7,5 @@ venv/
 
 *.sqlite3
 
-static/img/
+media/img/
 

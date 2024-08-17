@@ -11,12 +11,13 @@ class Place(models.Model):
     def __str__(self):
         return self.title
 
+
 class PlaceImage(models.Model):
-    place = models.ForeignKey('Place', on_delete=models.CASCADE, null=True)
-    url_img = models.ImageField(upload_to="static/img/")
+    place = models.ForeignKey("Place", on_delete=models.CASCADE, null=True)
+    url_img = models.ImageField(upload_to="img/")
 
     def __str__(self):
         return f"{self.id} {self.place}"
 
     class Meta:
-        ordering = ['-id']
+        ordering = ["-id"]
