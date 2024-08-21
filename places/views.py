@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from .models import Place
 
 moscow_legends = Place.objects.get(pk=1)
@@ -54,3 +55,7 @@ def index(request):
         "places/index.html",
         context={"places": places},
     )
+
+
+def places(request, pk):
+    return HttpResponse(Place.objects.get(pk=pk))
