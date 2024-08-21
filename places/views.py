@@ -1,27 +1,50 @@
 from django.shortcuts import render
+from .models import Place
+
+moscow_legends = Place.objects.get(pk=1)
+roofs_24 = Place.objects.get(pk=2)
+places = Place.objects.all()
+
+features = []
+for place in places:
+    features.append(
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [place.show_coord_lng, place.show_coord_lat],
+            },
+            "properties": {
+                "title": place.short_title,
+                "placeId": place.id,
+                "detailsUrl": None,
+            },
+        }
+    )
 
 places = {
     "type": "FeatureCollection",
-    "features": [
-        {
-            "type": "Feature",
-            "geometry": {"type": "Point", "coordinates": [37.62, 55.793676]},
-            "properties": {
-                "title": "«Легенды Москвы",
-                "placeId": "moscow_legends",
-                "detailsUrl": "static/js/moscow_legends.json",
-            },
-        },
-        {
-            "type": "Feature",
-            "geometry": {"type": "Point", "coordinates": [37.64, 55.753676]},
-            "properties": {
-                "title": "Крыши24.рф",
-                "placeId": "roofs24",
-                "detailsUrl": "static/js/roofs24.json",
-            },
-        },
-    ],
+    "features": features,
+    # "features": [
+    #     {
+    #         "type": "Feature",
+    #         "geometry": {"type": "Point", "coordinates": [37.62, 55.793676]},
+    #         "properties": {
+    #             "title": moscow_legends.short_title,
+    #             "placeId": moscow_legends.id,
+    #             "detailsUrl": None,
+    #         },
+    #     },
+    #     {
+    #         "type": "Feature",
+    #         "geometry": {"type": "Point", "coordinates": [37.64, 55.753676]},
+    #         "properties": {
+    #             "title": roofs_24.short_title,
+    #             "placeId": roofs_24.id,
+    #             "detailsUrl": None,
+    #         },
+    #     },
+    # ],
 }
 
 
