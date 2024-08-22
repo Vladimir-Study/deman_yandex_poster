@@ -1,4 +1,5 @@
 from django.db import models
+from where_to_go import settings
 
 
 class Place(models.Model):
@@ -18,6 +19,10 @@ class Place(models.Model):
 class PlaceImage(models.Model):
     place = models.ForeignKey("Place", on_delete=models.CASCADE, null=True)
     url_img = models.ImageField(upload_to="img/")
+
+    @property
+    def get_absolute_image_url(self):
+        return f"{settings.MEDIA_URL}{self.url_img}"
 
     def __str__(self):
         return f"{self.id} {self.place}"

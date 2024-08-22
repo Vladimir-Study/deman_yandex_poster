@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Place
+from django.http import JsonResponse
+from .models import Place, PlaceImage
 
-moscow_legends = Place.objects.get(pk=1)
-roofs_24 = Place.objects.get(pk=2)
+import json
+
+# moscow_legends = Place.objects.get(pk=1)
+# roofs_24 = Place.objects.get(pk=2)
 places = Place.objects.all()
 
 features = []
@@ -58,4 +60,21 @@ def index(request):
 
 
 def places(request, pk):
-    return HttpResponse(Place.objects.get(pk=pk))
+    place = Place.objects.get(pk=pk)
+    place_images = PlaceImage.objects.filter(place__id=pk)
+    imgs = [img.get_absolute_image_url for img in place_images]
+    response_body = {
+        "title": place.title,
+        "imgs": imgs,
+        "description_short": place.description_short,
+        "description_long": place.description_long,
+        "coordinates": {
+            "lng": place.coord_lng,
+            "lat": place.coord_lat,
+        },
+    }
+    return JsonResponse(
+        response_body,
+        safe=False,
+        json_dumps_params={'ensure_ascii': False}
+    )
