@@ -6,6 +6,7 @@ venv/
 # database
 
 *.sqlite3
+.env
 
 media/img/
 
