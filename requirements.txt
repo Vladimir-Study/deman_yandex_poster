@@ -1,0 +1,5 @@
+Django==5.1
+django-admin-sortable2==2.2.2
+django-tinymce==4.1.0
+pillow==10.4.0
+pydantic-settings==2.4.0
