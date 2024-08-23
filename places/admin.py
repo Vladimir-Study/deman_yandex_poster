@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.utils.html import format_html, mark_safe
+from adminsortable2.admin import SortableAdminBase, SortableInlineAdminMixin
 
 from .models import PlaceImage, Place
 
 
-class PlaceImagesAdmin(admin.TabularInline):
+class PlaceImagesAdmin(SortableInlineAdminMixin, admin.TabularInline):
     model = PlaceImage
+    extra = 1
     readonly_fields = [
         "headshot_image",
     ]
@@ -15,7 +17,7 @@ class PlaceImagesAdmin(admin.TabularInline):
 
 
 @admin.register(Place)
-class AdminPlace(admin.ModelAdmin):
+class AdminPlace(SortableAdminBase, admin.ModelAdmin):
     empty_value_display = "-empty-"
     inlines = [
         PlaceImagesAdmin,

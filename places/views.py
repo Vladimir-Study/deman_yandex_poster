@@ -17,7 +17,7 @@ for place in places:
             "properties": {
                 "title": place.short_title,
                 "placeId": place.id,
-                "detailsUrl": reverse_lazy('place_url', args=[place.id]),
+                "detailsUrl": reverse_lazy("place_url", args=[place.id]),
             },
         }
     )
@@ -51,7 +51,5 @@ def places_view(request, pk):
         },
     }
     return JsonResponse(
-        response_body,
-        safe=False,
-        json_dumps_params={'ensure_ascii': False}
+        response_body, safe=False, json_dumps_params={"ensure_ascii": False}
     )

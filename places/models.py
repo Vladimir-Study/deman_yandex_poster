@@ -15,10 +15,14 @@ class Place(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ["id"]
+
 
 class PlaceImage(models.Model):
     place = models.ForeignKey("Place", on_delete=models.CASCADE, null=True)
     url_img = models.ImageField(upload_to="img/")
+    position = models.PositiveIntegerField("Позиция", default=0)
 
     @property
     def get_absolute_image_url(self):
@@ -28,4 +32,5 @@ class PlaceImage(models.Model):
         return f"{self.id} {self.place}"
 
     class Meta:
-        ordering = ["-id"]
+        ordering = ["position"]
+        indexes = [models.Index(fields=["position"])]
