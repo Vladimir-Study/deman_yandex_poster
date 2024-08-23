@@ -1,12 +1,13 @@
 from django.db import models
 from where_to_go import settings
+from tinymce import models as tinymce_model
 
 
 class Place(models.Model):
     title = models.CharField(max_length=250)
     short_title = models.CharField(max_length=100)
     description_short = models.CharField(max_length=500)
-    description_long = models.TextField()
+    description_long = tinymce_model.HTMLField()
     coord_lng = models.FloatField()
     coord_lat = models.FloatField()
     show_coord_lng = models.FloatField()
