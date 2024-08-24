@@ -13,13 +13,16 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Settings(BaseSettings):
     secret_key: str = Field(validation_alias="SECRET_KEY")
     debug_mode: bool = Field(validation_alias="DEBUG")
 
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    model_config = SettingsConfigDict()
 
 
 SECRET_DATA = Settings().model_dump()
