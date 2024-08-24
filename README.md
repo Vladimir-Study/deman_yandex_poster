@@ -30,6 +30,7 @@ pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
 ```
+* Задайте [переменные окружения](.env.example)
 * Запустите вебсервер командой
 ```
 python manage.py runserver
