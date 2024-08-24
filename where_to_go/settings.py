@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = os.environ.get("DEBUG")
+DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
@@ -126,7 +126,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-STATIC_ROOT = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 #
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "static"),
