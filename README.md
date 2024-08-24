@@ -18,7 +18,7 @@
 * Перейдите в каталок с файлом [manage.py](manage.py)
 * Создайте и активируйте виртуальное пространство
 ```
-python3 -m venv venv
+python -m venv venv
 source venv/bin/activate
 ```
 * Установите зависимости
@@ -27,12 +27,12 @@ pip install -r requirements.txt
 ```
 * Выполните миграции
 ```
-python3 manage.py makemigrations
-python3 manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
 ```
 * Запустите вебсервер командой
 ```
-python3 manage.py runserver
+python manage.py runserver
 ```
 * Откройте в браузере [сайт](http://127.0.0.1:8000/)
 
@@ -102,12 +102,24 @@ JSON объект имеет следующий вид
 Наполнение базы данных производится через админ-панель фреймворка Django.
 Для управления админ-панелью создайте пользователя с правами администратора
 ```
-python3 manage.py createsuperuser
+python manage.py createsuperuser
 ```
 
 Внешний вид админ-панели
 
 ![Админ-панель](sources/admin.jpg)
+
+
+### Дополнительные возможности
+
+---
+
+Для загрузки данных в базу данных реализована пользовательская команда load_place
+```
+python manage.py load_place "url"
+```
+
+[Данные для сайта](https://github.com/devmanorg/where-to-go-places/tree/master/places)
 
 ### Используемые библиотеки
 
@@ -128,6 +140,7 @@ Backend
 * [pillow](https://pillow.readthedocs.io/en/stable/) - библиотека для работы с изображениями
 * [pydantic-settings](https://docs.pydantic.dev/latest/concepts/pydantic_settings/) - 
 библиотека для работы с переменными окружения
+* [requests](https://requests.readthedocs.io/en/latest/) - библиотека для отправка HTTP запросов
 
 ### Цели проекта
 
