@@ -13,19 +13,19 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+# class Settings(BaseSettings):
+#     secret_key: str = Field(validation_alias="SECRET_KEY")
+#     debug_mode: bool = Field(validation_alias="DEBUG")
 #
-# load_dotenv()
-
-
-class Settings(BaseSettings):
-    secret_key: str = Field(validation_alias="SECRET_KEY")
-    debug_mode: bool = Field(validation_alias="DEBUG")
-
-    model_config = SettingsConfigDict(env_file=(".env.example", ".env"))
-
-
-SECRET_DATA = Settings().model_dump()
+#     model_config = SettingsConfigDict(env_file=(".env.example", ".env"))
+#
+#
+# SECRET_DATA = Settings().model_dump()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,9 +34,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-SECRET_KEY = SECRET_DATA.get("secret_key")
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = SECRET_DATA.get("debug_mode")
+DEBUG = os.environ.get("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
