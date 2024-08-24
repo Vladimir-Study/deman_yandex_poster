@@ -29,7 +29,6 @@ places = {
 
 
 def index_view(request):
-    print(places)
     return render(
         request,
         "places/index.html",
