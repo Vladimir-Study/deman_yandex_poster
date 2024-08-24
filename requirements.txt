@@ -1,4 +1,4 @@
-Django==5.1
+Django
 django-admin-sortable2==2.2.2
 django-tinymce==4.1.0
 pillow==10.4.0
