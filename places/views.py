@@ -1,34 +1,33 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.http import JsonResponse
 from django.urls import reverse_lazy
-from .models import Place, PlaceImage
-
-places = get_list_or_404(Place)
-
-features = []
-for place in places:
-    features.append(
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [place.show_coord_lng, place.show_coord_lat],
-            },
-            "properties": {
-                "title": place.short_title,
-                "placeId": place.id,
-                "detailsUrl": reverse_lazy("place_url", args=[place.id]),
-            },
-        }
-    )
-
-places = {
-    "type": "FeatureCollection",
-    "features": features,
-}
+from places.models import Place, PlaceImage
 
 
 def index_view(request):
+    places = get_list_or_404(Place)
+
+    features = []
+    for place in places:
+        features.append(
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [place.show_coord_lng, place.show_coord_lat],
+                },
+                "properties": {
+                    "title": place.short_title,
+                    "placeId": place.id,
+                    "detailsUrl": reverse_lazy("place_url", args=[place.id]),
+                },
+            }
+        )
+
+    places = {
+        "type": "FeatureCollection",
+        "features": features,
+    }
     return render(
         request,
         "places/index.html",
