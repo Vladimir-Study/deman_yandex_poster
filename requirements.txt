@@ -1,7 +1,7 @@
-Django
+Django==4
 django-admin-sortable2==2.2.2
 django-tinymce==4.1.0
 pillow==10.4.0
 pydantic-settings==2.4.0
 python-dotenv==1.0.1
-requests
+requests==2.32.3
