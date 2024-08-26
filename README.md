@@ -27,10 +27,11 @@ pip install -r requirements.txt
 ```
 * Выполните миграции
 ```
-python manage.py makemigrations
 python manage.py migrate
 ```
 * Задайте [переменные окружения](.env.example)
+  - SECRET_KEY - Секретный ключ - используется для обеспечения криптографической подписи, 
+  его значение должно быть уникальным и непредсказуемым. Должен быть строкой.
 * Запустите вебсервер командой
 ```
 python manage.py runserver
@@ -133,7 +134,8 @@ Frontend:
 * [Vue.js](https://ru.vuejs.org/) — реактивные шаблоны на фронтенде
 
 Backend
-* [Django 5.1]() - серверная часть сайта
+* [Python 3.10](https://www.python.org/) - языка разработки Backend 
+* [Django 4](https://www.djangoproject.com/) - серверная часть сайта
 * [django-admin-sortable2](https://django-admin-sortable2.readthedocs.io/en/latest/) - 
 перетаскивание фото в админ-панели 
 * [django-tinymce](https://django-tinymce.readthedocs.io/en/latest/) - удобное редактирование 
