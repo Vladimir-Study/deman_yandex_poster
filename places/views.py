@@ -14,10 +14,10 @@ def index_view(request):
                 "type": "Feature",
                 "geometry": {
                     "type": "Point",
-                    "coordinates": [place.show_coord_lng, place.show_coord_lat],
+                    "coordinates": [place.coord_lng, place.coord_lat],
                 },
                 "properties": {
-                    "title": place.short_title,
+                    "title": place.title,
                     "placeId": place.id,
                     "detailsUrl": reverse_lazy("place_url", args=[place.id]),
                 },
