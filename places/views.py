@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.http import JsonResponse
 from django.urls import reverse_lazy
+
 from places.models import Place, PlaceImage
 
 
@@ -42,8 +43,8 @@ def places_view(request, pk):
     response_body = {
         "title": place.title,
         "imgs": imgs,
-        "description_short": place.description_short,
-        "description_long": place.description_long,
+        "description_short": place.short_description,
+        "description_long": place.long_description,
         "coordinates": {
             "lng": place.coord_lng,
             "lat": place.coord_lat,

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html, mark_safe
 from adminsortable2.admin import SortableAdminBase, SortableInlineAdminMixin
 
-from .models import PlaceImage, Place
+from places.models import PlaceImage, Place
 
 
 class PlaceImagesAdmin(SortableInlineAdminMixin, admin.TabularInline):
@@ -13,7 +13,7 @@ class PlaceImagesAdmin(SortableInlineAdminMixin, admin.TabularInline):
     ]
 
     def headshot_image(self, obj):
-        return format_html(mark_safe(f"<img src='{obj.url_img.url}' width='150'/>"))
+        return format_html(mark_safe(f"<img src='{obj.photo.url}' width='150'/>"))
 
 
 @admin.register(Place)
