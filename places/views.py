@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_list_or_404, get_object_or_404
+from django.shortcuts import render
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 
@@ -6,7 +6,7 @@ from places.models import Place, PlaceImage
 
 
 def index_view(request):
-    places = get_list_or_404(Place)
+    places = Place.objects.all()
 
     features = []
     for place in places:
@@ -37,8 +37,8 @@ def index_view(request):
 
 
 def places_view(request, pk):
-    place = get_object_or_404(Place, pk=pk)
-    place_images = get_list_or_404(PlaceImage, place__id=pk)
+    place = Place.objects.get(pk=pk)
+    place_images = PlaceImage.objects.filter(place__id=pk)
     imgs = [img.get_absolute_image_url for img in place_images]
     response_body = {
         "title": place.title,
