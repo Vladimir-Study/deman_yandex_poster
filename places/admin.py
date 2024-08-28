@@ -5,7 +5,7 @@ from adminsortable2.admin import SortableAdminBase, SortableInlineAdminMixin
 from places.models import PlaceImage, Place
 
 
-class PlaceImagesAdmin(SortableInlineAdminMixin, admin.TabularInline):
+class SubtablesPlaceImages(SortableInlineAdminMixin, admin.TabularInline):
     model = PlaceImage
     extra = 1
     readonly_fields = [
@@ -14,12 +14,18 @@ class PlaceImagesAdmin(SortableInlineAdminMixin, admin.TabularInline):
 
     def headshot_image(self, obj):
         src_html = f"src='{obj.photo.url}'"
-        return format_html(f"<img {mark_safe(src_html)} width='150'/>")
+        img_style_html = "style='max-width: 150px; max-height:150px'"
+        return format_html(f"<img {mark_safe(src_html)} {img_style_html}/>")
 
 
 @admin.register(Place)
 class AdminPlace(SortableAdminBase, admin.ModelAdmin):
     empty_value_display = "-empty-"
     inlines = [
-        PlaceImagesAdmin,
+        SubtablesPlaceImages,
     ]
+
+
+@admin.register(PlaceImage)
+class AdminPlaceImage(admin.ModelAdmin):
+    raw_id_fields = ("place",)
