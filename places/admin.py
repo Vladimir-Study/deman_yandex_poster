@@ -13,7 +13,8 @@ class PlaceImagesAdmin(SortableInlineAdminMixin, admin.TabularInline):
     ]
 
     def headshot_image(self, obj):
-        return format_html(mark_safe(f"<img src='{obj.photo.url}' width='150'/>"))
+        src_html = f"src='{obj.photo.url}'"
+        return format_html(f"<img {mark_safe(src_html)} width='150'/>")
 
 
 @admin.register(Place)
