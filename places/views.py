@@ -37,17 +37,16 @@ def index_view(request):
 
 
 def places_view(request, pk):
-    place = Place.objects.get(pk=pk)
-    place_images = PlaceImage.objects.filter(place__id=pk)
+    place_images = PlaceImage.objects.select_related("place").filter(place__id=pk)
     imgs = [img.get_absolute_image_url for img in place_images]
     response_body = {
-        "title": place.title,
+        "title": place_images[0].place.title,
         "imgs": imgs,
-        "description_short": place.short_description,
-        "description_long": place.long_description,
+        "description_short": place_images[0].place.short_description,
+        "description_long": place_images[0].place.long_description,
         "coordinates": {
-            "lng": place.coord_lng,
-            "lat": place.coord_lat,
+            "lng": place_images[0].place.coord_lng,
+            "lat": place_images[0].place.coord_lat,
         },
     }
     return JsonResponse(
