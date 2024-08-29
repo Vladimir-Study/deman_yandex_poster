@@ -16,21 +16,21 @@ class Command(BaseCommand):
         urls = options.get("urls")[0]
         if urls:
             for url in urls:
-                place_data = requests.get(url).json()
+                raw_data_place = requests.get(url).json()
                 new_place = Place.objects.create(
-                    title=place_data.get("title"),
-                    short_description=place_data.get("description_short"),
-                    long_description=place_data.get("description_long"),
-                    coord_lng=place_data.get("coordinates").get("lng"),
-                    coord_lat=place_data.get("coordinates").get("lat"),
+                    title=raw_data_place.get("title"),
+                    short_description=raw_data_place.get("description_short"),
+                    long_description=raw_data_place.get("description_long"),
+                    coord_lng=raw_data_place.get("coordinates").get("lng"),
+                    coord_lat=raw_data_place.get("coordinates").get("lat"),
                 )
-                self.save_image(place_data.get("imgs"), new_place)
+                self.save_image(raw_data_place.get("imgs"), new_place)
 
     def save_image(self, images: list, model: Place):
         if images:
             for image in images:
                 name = image.split("/")[-1]
-                place_data = requests.get(image)
-                place_image = ContentFile(place_data.content)
+                payload_image_data = requests.get(image)
+                image_place = ContentFile(payload_image_data.content)
                 img = PlaceImage(place=model)
-                img.photo.save(name, place_image, save=True)
+                img.photo.save(name, image_place, save=True)

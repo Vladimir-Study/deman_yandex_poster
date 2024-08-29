@@ -7,7 +7,6 @@ from places.models import Place, PlaceImage
 
 def index_view(request):
     places = Place.objects.all()
-
     features = []
     for place in places:
         features.append(
